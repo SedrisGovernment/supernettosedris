@@ -1,0 +1,708 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supernetto</title>
+
+  <style>
+    :root {
+      --yellow: #e6f000;
+      --blue: #00283b;
+      --background: #fafaf5;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 15px;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--background);
+      color: #17212a;
+      overflow-wrap: break-word;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    .top-bar {
+      background: var(--blue);
+      color: white;
+      padding: 12px 22px;
+      font-size: 13px;
+    }
+
+    .hours-list {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+    }
+
+    .hours-list strong {
+      color: var(--yellow);
+    }
+
+    .header {
+      background: var(--yellow);
+      padding: 10px 35px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 95px;
+    }
+
+    .navigation {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 28px;
+    }
+
+    .navigation a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .navigation a:hover {
+      text-decoration: underline;
+    }
+
+    .logo {
+      margin-left: auto;
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .logo img {
+      display: block;
+      width: 100px;
+      height: 75px;
+      object-fit: contain;
+    }
+
+    .hero {
+      padding: 65px 8%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 45px;
+      background: var(--yellow);
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 1;
+      color: var(--blue);
+      margin: 15px 0;
+    }
+
+    .hero p {
+      line-height: 1.7;
+      font-size: 17px;
+    }
+
+    .hero-image {
+      width: 100%;
+      max-height: 390px;
+      object-fit: contain;
+    }
+
+    .button {
+      display: inline-block;
+      background: var(--blue);
+      color: white;
+      padding: 15px 23px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 12px;
+    }
+
+    .section {
+      padding: 55px 7%;
+    }
+
+    .section h2 {
+      font-size: 36px;
+      line-height: 1.2;
+    }
+
+    .search {
+      display: block;
+      width: 100%;
+      max-width: 350px;
+      padding: 13px 16px;
+      border: 1px solid #ddd;
+      border-radius: 25px;
+      font-size: 16px;
+      margin-bottom: 25px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 24px;
+    }
+
+    .product {
+      min-width: 0;
+      background: white;
+      border: 1px solid #e5e5df;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .product img {
+      display: block;
+      width: 100%;
+      height: 260px;
+      object-fit: contain;
+      padding: 15px;
+      background: #f0efe5;
+    }
+
+    .product-info {
+      padding: 20px;
+    }
+
+    .product-info h3 {
+      font-size: 23px;
+      margin: 0 0 12px;
+    }
+
+    .price {
+      color: var(--blue);
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .old-price {
+      color: #6b7280;
+      font-size: 15px;
+      font-weight: normal;
+      margin-right: 8px;
+    }
+
+    .discount {
+      display: inline-block;
+      background: var(--yellow);
+      padding: 4px 7px;
+      border-radius: 6px;
+      font-size: 13px;
+    }
+
+    .availability {
+      margin-top: 18px;
+      padding-top: 15px;
+      border-top: 1px solid #e5e5df;
+    }
+
+    .availability-title {
+      display: block;
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .availability-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .country {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      background: #f0efe5;
+      color: var(--blue);
+      border: 1px solid #e5e5df;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .locations-intro {
+      max-width: 650px;
+      line-height: 1.7;
+      color: #56616a;
+      margin-bottom: 28px;
+    }
+
+    .location-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      background: white;
+      border: 1px solid #e5e5df;
+      border-radius: 18px;
+      overflow: hidden;
+      max-width: 1050px;
+    }
+
+    .location-image {
+      background: #e7e7e7;
+      min-height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+
+    .location-image img {
+      display: block;
+      width: 100%;
+      max-height: 400px;
+      object-fit: contain;
+    }
+
+    .location-info {
+      min-width: 0;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .location-label {
+      display: inline-block;
+      align-self: flex-start;
+      background: var(--yellow);
+      color: var(--blue);
+      padding: 7px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .location-info h3 {
+      font-size: 28px;
+      color: var(--blue);
+      margin: 16px 0 10px;
+    }
+
+    .location-info p {
+      line-height: 1.7;
+      color: #56616a;
+    }
+
+    .location-address {
+      margin-top: 8px;
+      padding-top: 15px;
+      border-top: 1px solid #e5e5df;
+      color: var(--blue) !important;
+      font-weight: bold;
+    }
+
+    .hours-box {
+      background: white;
+      border: 1px solid #e5e5df;
+      border-radius: 16px;
+      padding: 25px;
+      max-width: 650px;
+    }
+
+    .hour-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 15px 0;
+      border-bottom: 1px solid #e5e5df;
+    }
+
+    .hour-row:last-child {
+      border-bottom: none;
+    }
+
+    footer {
+      background: var(--blue);
+      color: white;
+      text-align: center;
+      padding: 25px;
+    }
+
+    /* MOBILE VERSION */
+    @media (max-width: 650px) {
+      .top-bar {
+        padding: 12px 16px;
+      }
+
+      .hours-list {
+        align-items: flex-start;
+        gap: 7px 12px;
+        font-size: 12px;
+      }
+
+      .header {
+        min-height: auto;
+        padding: 12px 16px;
+        flex-direction: column-reverse;
+        align-items: stretch;
+        gap: 10px;
+      }
+
+      .logo {
+        margin: 0 auto;
+      }
+
+      .logo img {
+        width: 88px;
+        height: 60px;
+      }
+
+      .navigation {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .navigation a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 10px 6px;
+        text-align: center;
+        background: rgba(255,255,255,0.5);
+        border-radius: 10px;
+        font-size: 13px;
+      }
+
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 18px;
+        padding: 32px 20px;
+      }
+
+      .hero h1 {
+        font-size: clamp(34px, 10vw, 48px);
+        line-height: 1.05;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .hero-image {
+        max-height: 230px;
+      }
+
+      .button {
+        padding: 14px 19px;
+        text-align: center;
+      }
+
+      .section {
+        padding: 32px 18px;
+      }
+
+      .section h2 {
+        font-size: 28px;
+      }
+
+      .search {
+        max-width: none;
+        min-height: 46px;
+        margin-bottom: 18px;
+      }
+
+      .products {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+      }
+
+      .product img {
+        height: 220px;
+      }
+
+      .product-info {
+        padding: 17px;
+      }
+
+      .product-info h3 {
+        font-size: 21px;
+      }
+
+      .location-card {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .location-image {
+        min-height: 0;
+        padding: 14px;
+      }
+
+      .location-image img {
+        max-height: 260px;
+      }
+
+      .location-info {
+        padding: 20px;
+      }
+
+      .location-info h3 {
+        font-size: 24px;
+      }
+
+      .hours-box {
+        padding: 16px;
+      }
+
+      .hour-row {
+        align-items: center;
+        gap: 12px;
+        padding: 13px 0;
+        font-size: 14px;
+      }
+
+      footer {
+        padding: 22px 16px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .navigation {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .hour-row {
+        font-size: 13px;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="top-bar">
+    <div class="hours-list">
+      <strong>OPENING HOURS</strong>
+      <span>Mon–Fri: until 19:00</span>
+      <span>Saturday: until 17:30</span>
+      <span>Sunday: Closed</span>
+    </div>
+  </div>
+
+  <header class="header">
+    <nav class="navigation">
+      <a href="#home">Home</a>
+      <a href="#products">View Products</a>
+      <a href="#locations">Locations</a>
+      <a href="#hours">Opening Hours</a>
+    </nav>
+
+    <a href="#home" class="logo">
+      <img
+        src="https://media.discordapp.net/attachments/1545164556605849634/1558851597604233296/supernettto_final.png?ex=6accf12e&is=6acb9fae&hm=ce49183388938ae023394dda452672043492ddc518217ff2ac1c6d2af0e10dab&=&format=webp&quality=lossless"
+        alt="Supernetto Logo">
+    </a>
+  </header>
+
+  <main>
+
+    <section class="hero" id="home">
+      <div>
+        <p><strong>WELCOME TO SUPERNETTO</strong></p>
+        <h1>Good products.<br>Simple prices.</h1>
+        <p>
+          Discover our products and check their prices.
+          Welcome to Supernetto!
+        </p>
+        <a href="#products" class="button">View Products ↓</a>
+      </div>
+
+      <img
+        class="hero-image"
+        src="https://media.discordapp.net/attachments/1545164556605849634/1558578121936998540/hgm.png?ex=6acbf27d&is=6acaa0fd&hm=e243442766ff2118e71dda26d5ca33aee04e0e1482f0e545aca61d77b319dfb9&=&format=webp&quality=lossless"
+        alt="Sevza Candle">
+    </section>
+
+    <section class="section" id="products">
+      <h2>Our Products</h2>
+      <p>Discover the Supernetto collection.</p>
+
+      <input
+        class="search"
+        id="search"
+        type="search"
+        placeholder="Search products..."
+        aria-label="Search products">
+
+      <div class="products" id="productList">
+
+        <!-- SEVZA CANDLE -->
+        <article class="product" data-name="Sevza Candle">
+          <img
+            src="https://media.discordapp.net/attachments/1545164556605849634/1558578121936998540/hgm.png?ex=6acbf27d&is=6acaa0fd&hm=e243442766ff2118e71dda26d5ca33aee04e0e1482f0e545aca61d77b319dfb9&=&format=webp&quality=lossless"
+            alt="Sevza Candle 100 g">
+
+          <div class="product-info">
+            <h3>Sevza Candle</h3>
+            <p>100 g · Made in Sedris</p>
+
+            <p class="price">
+              <span class="old-price"><s>12.99 €</s></span>
+              <span>9.99 €</span>
+              <span class="discount">-23%</span>
+            </p>
+
+            <div class="availability">
+              <span class="availability-title">Available in:</span>
+              <div class="availability-list">
+                <span class="country">Sedris</span>
+                <span class="country">Lakora</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- SEVODA PURE WATER -->
+        <article class="product" data-name="SEVODA Pure Water">
+          <img
+            src="https://cdn.discordapp.com/attachments/1545164556605849634/1558890652786499615/Screenshot_2026-10-11_191021.png?ex=6acd158e&is=6acbc40e&hm=5f688c6e93d95e11fe486dd481277e32d31d35176c58db045730f5db93992396&"
+            alt="SEVODA Pure Water bottle">
+
+          <div class="product-info">
+            <h3>SEVODA Pure Water</h3>
+            <p>Pure Water · Made in Sedris</p>
+
+            <p class="price">1.99 €</p>
+
+            <div class="availability">
+              <span class="availability-title">Available in:</span>
+              <div class="availability-list">
+                <span class="country">Sedris</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <p id="noResults" hidden>No products found.</p>
+    </section>
+
+    <section class="section" id="locations">
+      <h2>All Supernettos in Sedris</h2>
+      <p class="locations-intro">
+        Find Supernetto locations across Sedris.
+        Explore our store and its location.
+      </p>
+
+      <article class="location-card">
+        <div class="location-image">
+          <img
+            src="https://media.discordapp.net/attachments/1545164556605849634/1558855481831718982/lolllll.png?ex=6accf4cd&is=6acba34d&hm=036061f1b4a00eb0c2c910bf4b8c6da550403d63099b73b38534bfd65f86a3a5&=&format=webp&quality=lossless&width=330&height=384"
+            alt="Supernetto location in Sedris">
+        </div>
+
+        <div class="location-info">
+          <span class="location-label">Supernetto Store</span>
+          <h3>Supernetto Sedris</h3>
+          <p>
+            Visit Supernetto in Sedris to discover our products
+            and the Sevza Candle collection.
+          </p>
+          <p class="location-address">
+            <span aria-hidden="true">📍</span>
+            Location: Sedris, Нови Град Region
+          </p>
+        </div>
+      </article>
+    </section>
+
+    <section class="section" id="hours">
+      <h2>Opening Hours</h2>
+
+      <div class="hours-box">
+        <div class="hour-row">
+          <strong>Monday</strong>
+          <span>Until 19:00</span>
+        </div>
+        <div class="hour-row">
+          <strong>Tuesday</strong>
+          <span>Until 19:00</span>
+        </div>
+        <div class="hour-row">
+          <strong>Wednesday</strong>
+          <span>Until 19:00</span>
+        </div>
+        <div class="hour-row">
+          <strong>Thursday</strong>
+          <span>Until 19:00</span>
+        </div>
+        <div class="hour-row">
+          <strong>Friday</strong>
+          <span>Until 19:00</span>
+        </div>
+        <div class="hour-row">
+          <strong>Saturday</strong>
+          <span>Until 17:30</span>
+        </div>
+        <div class="hour-row">
+          <strong>Sunday</strong>
+          <span>Closed</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © <span id="year"></span> Supernetto
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    const search = document.getElementById("search");
+    const products = [
+      ...document.querySelectorAll(".product")
+    ];
+    const noResults = document.getElementById("noResults");
+
+    search.addEventListener("input", () => {
+      const term = search.value.toLowerCase().trim();
+      let visible = 0;
+
+      products.forEach(product => {
+        const matches = product.dataset.name
+          .toLowerCase()
+          .includes(term);
+
+        product.style.display = matches ? "block" : "none";
+
+        if (matches) visible++;
+      });
+
+      noResults.hidden = visible > 0;
+    });
+  </script>
+
+</body>
+</html>
